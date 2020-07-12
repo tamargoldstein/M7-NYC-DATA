@@ -6,6 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
+library(tidyverse)
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -15,16 +16,26 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
+
+```{r}
+NYC311 <- read_csv("https://data.cityofnewyork.us/resource/erm2-nwe9.csv?%24select=Created_Date,Agency,Complaint_Type,Incident_Address,Location")
+head(NYC311)
 ```
 
-## Including Plots
+Data is messy because multiple characters in one collum/ data overload in colum 4. 
+values of longitude and latitude are expressed as characters instead of numbers.
+every colum is not one variable accroding to tidy data. 
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+latitude_and_longitude <- NYC311 %>% 
+  separate(Location, into = c("point", "latitude", "longitude"), sep = " ") %>%
+  select(-point) 
+latitude_and_longitude
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+NYC
+```
+
