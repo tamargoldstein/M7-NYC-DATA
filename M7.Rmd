@@ -36,6 +36,17 @@ latitude_and_longitude
 ```
 
 ```{r}
-NYC
+house_number_and_street_name <- NYC311 %>% 
+  separate (Incident_Address, into = c("house_number", "street_name"))
+house_number_and_street_name
+```
+
+
+
+
+
+```{r}
+NYC311 %>%
+  separate(Created_Date, into = c("date", "time"))
 ```
 
